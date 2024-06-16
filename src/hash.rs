@@ -9,8 +9,5 @@ pub fn hash<T: AsRef<[u8]>>(input: T) -> Result<String> {
     for byte in result.iter() {
         res_str.push_str(&format!("{:x}", byte));
     }
-
-    let _ = res_str.split_off(8);
-
     Ok(res_str)
 }
