@@ -535,8 +535,6 @@ dependencies = [
  "anyhow",
  "nodb",
  "regex",
- "serde",
- "serde_json",
  "sha2",
 ]
 
