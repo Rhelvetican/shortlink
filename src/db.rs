@@ -1,8 +1,18 @@
 use anyhow::Result;
 use nodb::{DumpPolicy, NoDb, SerializationMethod};
-use std::path::Path;
+use std::{fs::create_dir_all, path::Path};
 
 use crate::DB_PATH;
+
+pub fn init_dir() -> Result<()> {
+    let path = Path::new(DB_PATH).parent().unwrap();
+
+    if !path.exists() {
+        create_dir_all(path)?;
+    }
+
+    Ok(())
+}
 
 fn is_db_init() -> bool {
     Path::new(DB_PATH).exists()

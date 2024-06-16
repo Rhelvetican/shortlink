@@ -7,7 +7,7 @@ pub fn hash<T: AsRef<[u8]>>(input: T) -> Result<String> {
     let result = hasher.finalize();
     let mut res_str = String::new();
     for byte in result.iter() {
-        res_str.push_str(&format!("{}", byte));
+        res_str.push_str(&format!("{:x}", byte));
     }
 
     let _ = res_str.split_off(8);

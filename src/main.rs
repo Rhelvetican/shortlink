@@ -12,12 +12,13 @@ use std::{
 };
 
 use anyhow::Result;
-use db::start_db;
+use db::{init_dir, start_db};
 use hash::hash;
 use regex::is_url;
 
 fn main() -> Result<()> {
-    let args = args().collect::<Vec<String>>();
+    init_dir()?;
+    let args = get_args();
     let mut dict = open_dict()?;
     let mut db = start_db()?;
     for url in args {
@@ -40,4 +41,10 @@ fn open_dict() -> Result<File> {
         .truncate(false)
         .create(true)
         .open(DICT)?)
+}
+
+fn get_args() -> Vec<String> {
+    let args = args().collect::<Vec<String>>();
+    let args = &args[1..];
+    args.iter().map(|arg| arg.to_string()).collect()
 }
